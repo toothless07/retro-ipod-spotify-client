@@ -13,8 +13,8 @@ from view_model import *
 from PIL import ImageTk, Image
 from sys import platform
 import os
-   
-  
+
+
 LARGEFONT =("ChicagoFLF", 90) 
 MED_FONT =("ChicagoFLF", 70) 
 SCALE = 1
@@ -27,13 +27,13 @@ UDP_PORT = 9090
 
 DIVIDER_HEIGHT = 3
 
-UP_KEY_CODE = 8255233 if platform == "darwin" else 111
-DOWN_KEY_CODE = 8320768 if platform == "darwin" else 116
-LEFT_KEY_CODE = 8124162 if platform == "darwin" else 113
-RIGHT_KEY_CODE = 8189699 if platform == "darwin" else 114
-PREV_KEY_CODE = 2818092 if platform == "darwin" else 0
-NEXT_KEY_CODE = 3080238 if platform == "darwin" else 0
-PLAY_KEY_CODE = 3211296 if platform == "darwin" else 0
+UP_KEY_CODE = 2113992448 if platform == "darwin" else 111
+DOWN_KEY_CODE = 2097215233 if platform == "darwin" else 116
+LEFT_KEY_CODE = 2063660802 if platform == "darwin" else 113
+RIGHT_KEY_CODE = 2080438019 if platform == "darwin" else 114
+PREV_KEY_CODE = 721420332 if platform == "darwin" else 0
+NEXT_KEY_CODE = 788529198 if platform == "darwin" else 0
+PLAY_KEY_CODE = 603979789 if platform == "darwin" else 0
 
 SCREEN_TIMEOUT_SECONDS = 60
 
@@ -56,7 +56,7 @@ def screen_wake():
 def flattenAlpha(img):
     global SCALE
     [img_w, img_h] = img.size
-    img = img.resize((int(img_w * SCALE), int(img_h * SCALE)), Image.ANTIALIAS)
+    img = img.resize((int(img_w * SCALE), int(img_h * SCALE)), Image.Resampling.LANCZOS)
     alpha = img.split()[-1]  # Pull off the alpha layer
     ab = alpha.tobytes()  # Original 8-bit alpha
 
@@ -78,9 +78,9 @@ def flattenAlpha(img):
     img.putalpha(mask)
 
     return img
-   
+
 class tkinterApp(tk.Tk): 
-      
+
     # __init__ function for class tkinterApp  
     def __init__(self, *args, **kwargs):  
         global LARGEFONT, MED_FONT, SCALE
@@ -99,28 +99,28 @@ class tkinterApp(tk.Tk):
         # creating a container 
         container = tk.Frame(self)   
         container.pack(side = "top", fill = "both", expand = True)  
-   
+
         container.grid_rowconfigure(0, weight = 1) 
         container.grid_columnconfigure(0, weight = 1) 
-   
+
         # initializing frames to an empty array 
         self.frames = {}   
-   
+
         # iterating through a tuple consisting 
         # of the different page layouts 
         for F in (StartPage, NowPlayingFrame, SearchFrame): 
-   
+
             frame = F(container, self) 
-   
+
             # initializing frame of that object from 
             # startpage, page1, page2 respectively with  
             # for loop 
             self.frames[F] = frame  
-   
+
             frame.grid(row = 0, column = 0, sticky ="nsew") 
-   
+
         self.show_frame(StartPage) 
-   
+
     # to display the current frame passed as 
     # parameter 
     def show_frame(self, cont): 
@@ -299,7 +299,7 @@ class NowPlayingFrame(tk.Frame):
         context_str = str(now_playing['track_index']) + " of " + str(now_playing['track_total'])
         self.context_label.configure(text=context_str)
         
-   
+
 class StartPage(tk.Frame): 
     def __init__(self, parent, controller):  
         tk.Frame.__init__(self, parent) 
@@ -544,7 +544,7 @@ def onDownPressed():
     global page, app
     page.nav_down()
     render(app, page.render())
-   
+
 # Driver Code 
 page = RootPage(None)
 app = tkinterApp() 

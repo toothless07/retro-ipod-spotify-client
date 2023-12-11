@@ -1,0 +1,5 @@
+#! /bin/sh
+
+export SPOTIPY_CLIENT_ID=682412e7f8984f5997368194ea3b10c4
+export SPOTIPY_CLIENT_SECRET=3616afddcc4a4d309bac5afb5426e443
+export SPOTIPY_REDIRECT_URI=https://www.google.com

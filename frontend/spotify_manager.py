@@ -228,6 +228,7 @@ def refresh_data():
     print("Spotify artists fetched: " + str(DATASTORE.getArtistCount()))
 
     results = sp.current_user_playlists(limit=pageSize)
+    print(results)
     totalindex = 0 # variable to preserve playlist sort index when calling offset loop down below
     while(results['next']):
         offset = results['offset']
@@ -469,10 +470,14 @@ def bg_loop():
         time.sleep(sleep_time)
         sleep_time = min(4, sleep_time * 2)
 
-sleep_time = 0.3
-thread = threading.Thread(target=bg_loop, args=())
-thread.daemon = True                            # Daemonize thread
-thread.start()
+# sleep_time = 0.3
+# thread = threading.Thread(target=bg_loop, args=())
+# thread.daemon = True                            # Daemonize thread
+# thread.start()
+refresh_devices()
+print(sp.devices())
+
+target_device_id = '23f644d3adfa509326ec0b3bb49f22a45a53e5be'
 
 def run_async(fun):
     threading.Thread(target=fun, args=()).start()

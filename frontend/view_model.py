@@ -14,7 +14,7 @@ LINE_NORMAL = 0
 LINE_HIGHLIGHT = 1
 LINE_TITLE = 2
 
-spotify_manager.refresh_devices()
+#spotify_manager.refresh_devices()
 
 class LineItem():
     def __init__(self, title = "", line_type = LINE_NORMAL, show_arrow = False):
@@ -527,5 +527,3 @@ class RootPage(MenuPage):
     def page_at(self, index):
         return self.get_pages()[index]
 
-
-    
